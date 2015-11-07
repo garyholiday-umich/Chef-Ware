@@ -2,6 +2,7 @@ var express = require('express');
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var bodyParser = require('body-parser');
+var http = require('http').Server(app);
 var app = express();
 
 // parse application/json
@@ -39,15 +40,11 @@ var jsonParser = bodyParser.json();
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
-
-
-
-
 
 
 // ACTUAL ROUTES
@@ -63,4 +60,7 @@ app.get('/', function(req, res) {
 
 // ************************ Listening on Port 8080 ******************
 app.listen(process.env.PORT || 8080);
-console.log('Listening on port 8080...');
+// http.listen(process.env.PORT || 8080, function(){
+//   console.log('Listening on port 8080...');
+// });
+

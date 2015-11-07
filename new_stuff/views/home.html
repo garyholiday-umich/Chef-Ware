@@ -81,6 +81,11 @@ document.onkeydown = function(e) {
                 currentInstruction -= 1;
                 document.getElementById("yolo").innerHTML = res[currentInstruction];
                 document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
+
+                // update mongo
+                update_obj.current_step = currentInstruction + 1;
+                update_obj.description = res[currentInstruction];
+                socket.emit('user update', update_obj);
               }
             }
 
@@ -100,6 +105,11 @@ document.onkeydown = function(e) {
               currentInstruction += 1;
               document.getElementById("yolo").innerHTML = res[currentInstruction];
               document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
+
+              // update mongo
+              update_obj.current_step = currentInstruction + 1;
+              update_obj.description = res[currentInstruction];
+              socket.emit('user update', update_obj);
             }
           }
 

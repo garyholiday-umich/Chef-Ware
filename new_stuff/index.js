@@ -2,8 +2,9 @@ var express = require('express');
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var bodyParser = require('body-parser');
-var http = require('http').Server(app);
 var app = express();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 
 // parse application/json
 app.use(bodyParser.json());
@@ -13,6 +14,7 @@ require('./routes')(app);
 
 mongoose = require('mongoose'),
 fs = require('fs');
+UserProgress = mongoose.model('UserProgress');
 
 // connecting to the mongodb database
 var mongoUri = 'mongodb://chef:boyardi@ds051524.mongolab.com:51524/chefware-db';
@@ -57,9 +59,33 @@ app.get('/', function(req, res) {
   res.render('home', {ra: jsonYo});
 });
 
+// ************ SOCKET IO INTEGRATION *********************
+io.on('connection', function(socket){
+  console.log('a user connected');
+
+  // when the user goes to a different step
+  socket.on('user update', function(update){
+    console.log('updating the following users entry to be: ');
+    console.log(update);
+
+    var query = { 'user_id': update.user_id };
+
+	UserProgress.findOneAndUpdate(query, update, function(err, doc){
+	    if (err) return res.send(500, { error: err });
+	    console.log("succesfully saved");
+	});
+  });
+
+  socket.on('disconnect', function(){
+    console.log('lets delete the user\'s entry in the database');
+  });
+});
+
 // ************************ Listening on Port 8080 ******************
-app.listen(process.env.PORT || 8080);
-// http.listen(process.env.PORT || 8080, function(){
-//   console.log('Listening on port 8080...');
-// });
+// app.listen(process.env.PORT || 8080);
+// console.log('listening on port 8080... hahaha...');
+
+http.listen(process.env.PORT || 8080, function(){
+  console.log('Listening on port 8080...');
+});
 

@@ -146,9 +146,20 @@ document.onkeydown = function(e) {
 
 
   <!--  Scripts-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" />
   <script src="../../bin/materialize.js"></script>
   <script src="js/init.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script>
+    var socket = io();
+    var update_obj = {
+      "user_id": 1,
+      "current_step": 2,
+      "description": "oh, helio daed, how r u?",
+      "recipe": "teriyaki-chicken"
+    };
+    socket.emit('user update', update_obj);
+  </script>
 
   </body>
 </html>

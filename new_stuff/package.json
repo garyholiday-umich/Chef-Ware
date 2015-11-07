@@ -15,7 +15,8 @@
     "express": "~4.9.x",
     "jade": "*",
     "querystring": "*",
-    "request": "*"
+    "request": "*",
+    "socket.io": "^1.3.7"
   },
   "devDependencies": {
     "mongoose": "^4.1.11"

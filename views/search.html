@@ -34,11 +34,17 @@ window.onload = function() {
                   + titleKeyword 
                   + "&api_key="+apiKey;
 
-      $('a').on('click', function(event) {
-        alert("");
+      // $('a').on('click', function(event) {
+      //   alert("polygamy");
+      //   event.preventDefault();
+      //   socket.emit('keep-id', { user_id: id });
+      // });
+
+      $(document).on("click","a",function(event){
         event.preventDefault();
-        socket.emit('keep-id', { user_id: id });
-      });
+        socket.emit('keep-id', { user_id: id }); 
+        window.location = $(this).attr('href');
+       });
 
       $.ajax({
                type: "GET",
@@ -61,7 +67,7 @@ window.onload = function() {
                                            '<p>' + data.Results[i].Subcategory + '</p>' +
                                          '</div>' +
                                          '<div class="card-action">' +
-                                           '<a href="/home?id=' + data.Results[i].RecipeID + '">Get Recipe</a>' +
+                                           '<a id="keep-id" href="/home?id=' + data.Results[i].RecipeID + '">Get Recipe</a>' +
                                          '</div>' +
                                        '</div>' +
                                      '</div>' +

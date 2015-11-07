@@ -41,12 +41,11 @@ exports.updateTimer = function(event, res) {
 
     // ./curl.exe -i -X POST -H 'Content-Type: application/json' -d '{ "seconds": 68, "type": "start" }' http://localhost:8080/api/timer/{user-id}
 
-    console.log(event);
+    console.log(event.body);
+    console.log("& then: ");
+    console.log(event.params.user_id);
 
-    // this is a HACKY way to parse the url parameters
-    var url_params = event.url.split("/");
-    console.log(url_params);
-    var user_id_in = url_params[3];
+    var user_id_in = event.params.user_id;
 
 	// error checking - should never exeute
     if (user_id_in === "") {
@@ -57,7 +56,7 @@ exports.updateTimer = function(event, res) {
     }
 
     // check to see if we need to start or pause the timer.
-    id_to_socket[user_id_in].emit('timer_update', { timer: event.body.seconds, type: event.body.type } );
+    id_to_socket[user_id_in].emit('timer_update', { seconds: event.body.seconds, type: event.body.type } );
     res.send(200, "timer was successfully updated");
 };
 

@@ -21,6 +21,13 @@ window.onload = function() {
       var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&title_kw="
                   + titleKeyword 
                   + "&api_key="+apiKey;
+
+      $('a').on('click', function(event) {
+        alert("");
+        event.preventDefault();
+        socket.emit('keep-id', { user_id: id });
+      });
+
       $.ajax({
                type: "GET",
               dataType: 'json',
@@ -51,6 +58,8 @@ window.onload = function() {
 
           }
     });
+
+    
 
 };
 </script>

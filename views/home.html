@@ -18,7 +18,6 @@
 window.onload = function() {
 
    var apiKey = "G5a62k9YEgh62xRZV1H6WklJ79hnjvOu";
-   update_obj = {};
         var recipeId = ra;
         var url = "http://api.bigoven.com/recipe/" + recipeId + "?api_key=" + apiKey;
         $.ajax({
@@ -243,9 +242,8 @@ function capitalizeFirstLetter(string) {
 
     socket.on('receive_id', function(data) {
       alert("hit!");
-      // update_obj = {};
+      update_obj = {};
       update_obj.user_id = data.id;
-      update_obj.recipe = ra.Title;
 
       alert(JSON.stringify(update_obj, null, 2));
     });

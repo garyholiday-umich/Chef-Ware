@@ -276,10 +276,18 @@ $(document).on("click","#logo-container",function(event){
 
         if(data.type == "pause") {
           clearInterval(window['timer_MSms_timer']);
-          console.log("Good");
         }
         else if(data.type == "resume") {
-          
+          $(function(){
+            $('#ms_timer').countdowntimer({
+              minutes : Math.floor(thisisatest1),
+              seconds : thisisatest2,
+              size : "lg"
+            });
+          });
+        }
+        else if(data.type == "clear") {
+          $('#ms_timer').innerHTML = "";
         }
         else {
           $(function(){

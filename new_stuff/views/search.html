@@ -1,0 +1,97 @@
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Chef Ware</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
+
+<script type="text/javascript">
+window.onload = function() {
+
+      var apiKey = "G5a62k9YEgh62xRZV1H6WklJ79hnjvOu";
+      var titleKeyword = ra;
+      var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&title_kw="
+                  + titleKeyword 
+                  + "&api_key="+apiKey;
+      $.ajax({
+               type: "GET",
+              dataType: 'json',
+              cache: false,
+              url: url,
+              success: function (data) {
+                console.log(data);
+           
+                for(var i = 0; i < 9; i++) {
+      
+                $("#yolo").append('' +
+                                     '<div class="col s10 m4">' +
+                                       '<div class="card">' +
+                                         '<div class="card-image">' +
+                                           '<img src="' + data.Results[i].ImageURL + '">' +
+                                           '<span class="card-title">' + data.Results[i].Title + '</span>' +
+                                         '</div>' +
+                                         '<div class="card-content">' +
+                                           '<p>' + data.Results[i].Subcategory + '</p>' +
+                                         '</div>' +
+                                         '<div class="card-action">' +
+                                           '<a href="/home?id=' + data.Results[i].RecipeID + '">Get Recipe</a>' +
+                                         '</div>' +
+                                       '</div>' +
+                                     '</div>' +
+                                   '');
+                 }
+
+          }
+    });
+
+};
+</script>
+
+<body>
+
+  <!-- Nav bar -->
+  <nav class="red" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Chef Ware</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#"></a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#"></a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container" style="margin-top:50px;">
+    <div class="row" id="yolo">
+
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <footer class="page-footer red">
+    <div class="footer-copyright">
+      <div class="container">
+      This is a footer
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="../../bin/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>

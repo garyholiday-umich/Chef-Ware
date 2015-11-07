@@ -9,63 +9,84 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 </head>
 
 <script type="text/javascript">
 window.onload = function() {
 
-  // grab the instructions
-  res = ra.Instructions.split(".");
-  ingrediants = ra.Ingredients;
+   var apiKey = "G5a62k9YEgh62xRZV1H6WklJ79hnjvOu";
+        var recipeId = ra;
+        var url = "http://api.bigoven.com/recipe/" + recipeId + "?api_key=" + apiKey;
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            cache: false,
+            url: url,
+            success: function (ra) {
 
-  console.log(ingrediants);
-  console.log(res);
 
 
-  $("#ingred").append('<ul>');
+             // grab the instructions
+        res = ra.Instructions.split(".");
+        ingrediants = ra.Ingredients;
 
-  // display ingrediants
-  for(var q = 0; q < ingrediants.length; q++) {
+        $("#ingred").append('<ul>');
 
-  	// check if units is null
-  	if(ingrediants[q].Unit){
-  		var unit = " " + ingrediants[q].Unit;
-  	}
-  	else {
-  		unit = "";
-  	}
-  	// check if Display Quantity
-  	if(ingrediants[q].DisplayQuantity) {
-      var display = ingrediants[q].DisplayQuantity;
-  	}
-  	else {
-  		display = "";
-  	}
-    $("#ingred").append("<li>" + display + unit + " "+ capitalizeFirstLetter(ingrediants[q].Name) + "</li>");
-  }
+       // display ingrediants
+       for(var q = 0; q < ingrediants.length; q++) {
 
-  $("#ingred").append("</ul>");
+  	     // check if units is null
+  	     if(ingrediants[q].Unit){
+  		    var unit = " " + ingrediants[q].Unit;
+  	      }
+  	      else {
+  		    unit = "";
+  	      }
+  	      // check if Display Quantity
+  	      if(ingrediants[q].DisplayQuantity) {
+             var display = ingrediants[q].DisplayQuantity;
+  	       }
+  	       else {
+  		     display = "";
+  	       }
+             $("#ingred").append("<li>" + display + unit + " "+ capitalizeFirstLetter(ingrediants[q].Name) + "</li>");
+           }
 
-  // remove last element becuase its empty
-  res.pop();
+           $("#ingred").append("</ul>");
 
-  // add the final message
-  res.push("Enjoy your " + ra.Title);
+
+           // remove last element becuase its empty
+           res.pop();
+
+           // add the final message
+           res.push("Enjoy your " + ra.Title);
   
-  // loop through results and trim white space
-  for(var i = 0; i < res.length; i++) {
-    res[i] = res[i].trim();
-    console.log(res[i]);
-  }
+           // loop through results and trim white space
+           for(var i = 0; i < res.length; i++) {
+              res[i] = res[i].trim();
 
-  // variable to keep track of current instruction
-  currentInstruction = 0;
+              // remove elemnt from the array if it is empty
+              if(res[i] == "" || res[i] == " ") {
+                res.splice(i, 1);
+              }
 
-  // print out the first instructions
-  document.getElementById("yolo").innerHTML = res[currentInstruction];
-  document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
+
+              console.log(res[i]);
+            }
+
+            // variable to keep track of current instruction
+            currentInstruction = 0;
+
+            // print out the first instructions
+            document.getElementById("yolo").innerHTML = res[currentInstruction];
+            document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
+
+
+        }
+    });
 
 };
 
@@ -136,7 +157,7 @@ function capitalizeFirstLetter(string) {
 
   <!-- Nav bar -->
   <nav class="red" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">ChefWare</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Chef Ware</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#"></a></li>
       </ul>
@@ -162,7 +183,7 @@ function capitalizeFirstLetter(string) {
         <div class="card-header" id="yolo_mom">
         </div>
       </div>
-      <div class="col m12 m5">
+      <div class="col m12 m5" id="animate_this">
       	<div id="yolo">
       	</div>
       </div>
@@ -182,7 +203,6 @@ function capitalizeFirstLetter(string) {
 
 
   <!--  Scripts-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="../../bin/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>

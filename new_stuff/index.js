@@ -4,7 +4,7 @@ var querystring = require('querystring');
 var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+io = require('socket.io')(http);
 
 // parse application/json
 app.use(bodyParser.json());
@@ -60,8 +60,33 @@ app.get('/', function(req, res) {
 });
 
 // ************ SOCKET IO INTEGRATION *********************
+client_mappings = {};
+id_to_socket = {};
+
 io.on('connection', function(socket){
   console.log('a user connected');
+
+  // when a user joins
+  socket.on('join', function (data) {
+    socket.join(data.user_id); // We are using room of socket io
+    client_mappings[data.username] = data.user_id;
+    id_to_socket[data.user_id] = socket;
+
+    var query = { 'user_id': data.user_id };
+
+    var update = {
+    	"user_id": data.user_id,
+    	"current_step": 0,
+    	"recipe": "",
+    	"description": ""
+    };
+
+    UserProgress.findOneAndUpdate(query, update, { upsert: true }, function(err, doc){
+	    if (err) return res.send(500, { error: err });
+	    console.log("succesfully joined session");
+	    console.log(update);
+	});
+  });
 
   // when the user goes to a different step
   socket.on('user update', function(update){
@@ -78,7 +103,14 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function(){
     console.log('lets delete the user\'s entry in the database');
+    // UserProgress.find({ id: user_id}).remove( function(err) {
+    // 	if (err)
+    // 		console.log('couldn\'t delete the document!');
+    // 	else 
+    // 		console.log('successfully deleted ' + user_id);
+    // });
   });
+
 });
 
 // ************************ Listening on Port 8080 ******************

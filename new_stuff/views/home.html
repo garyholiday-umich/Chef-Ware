@@ -187,14 +187,45 @@ function capitalizeFirstLetter(string) {
   <script src="js/init.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script>
+    // generating a random id
+    function makeid()
+    {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for(var i=0; i < 5; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
+    // joining the io socket
     var socket = io();
-    var update_obj = {
-      "user_id": 1,
-      "current_step": 2,
-      "description": "oh, helio daed, how r u?",
-      "recipe": "teriyaki-chicken"
-    };
-    socket.emit('user update', update_obj);
+    var my_name = "ishbaid";
+    var id = makeid();
+
+    socket.emit('join', { username: my_name, user_id: id });
+
+    socket.on('timer_update', function(data) {
+        alert(JSON.stringify(data, null, 2));
+        // gary <3 this is where we would put the code to update 
+        // the javascript timer on the page.
+        // if its starting the timer, "data.type" will be "start" and "data.seconds" will be an integer
+
+        // if its pausing the timer, "data.type" will be "pause" and "data.seconds" will be null
+        // if its resuming the timer, "data.type" will be "resume" and "data.seconds" will be null
+    });
+
+    // ************** TESTING WITH CURL **************
+    // ./curl.exe -i -X POST -H 'Content-Type: application/json' -d '{ "seconds": 68, "type": "start" }' http://localhost:8080/api/timer/{user-id}
+
+
+    // var update_obj = {
+    //   "user_id": id,
+    //   "current_step": 2,
+    //   "description": "oh, nerman how r the apples?",
+    //   "recipe": "teriyaki-chicken"
+    // };
+    // socket.emit('user update', update_obj);
   </script>
 
   </body>

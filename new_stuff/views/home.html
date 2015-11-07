@@ -223,6 +223,10 @@ function capitalizeFirstLetter(string) {
     var my_name = "ishbaid";
     var id = makeid();
 
+    var update_obj = {};
+    updat_obj.user_id = id;
+    update_obj.recipe = ra.Title;
+
     socket.emit('join', { username: my_name, user_id: id });
 
     socket.on('timer_update', function(data) {

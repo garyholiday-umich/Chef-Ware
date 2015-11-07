@@ -6,6 +6,11 @@ var app = express();
 var http = require('http').createServer(app);
 io = require('socket.io')(http);
 
+var Logger = require('le_node');
+var log = new Logger({
+  token:'0193579f-077a-32d5-8b82-f668588330d8'
+});
+
 // parse application/json
 app.use(bodyParser.json());
 
@@ -26,6 +31,7 @@ mongoose.connect(mongoUri, options, function(err) {
 	}
 	else {
 		console.log('successfully connected to the mongodb database in the cloud');
+    log.info("I'm a Lumberjack and I'm connected to MONGOdb");
 	}
 });
 var db = mongoose.connection;
@@ -53,6 +59,7 @@ app.set('views', __dirname + '/views');
 app.get('/', function(req, res) {
 
 	// do server side parsing / api requests, then send it to webpage
+  log.info("rendering the first page,,,, LOL!!!");
   res.render('search', {ra: "pizza"});
 });
 

@@ -11,6 +11,7 @@
     "body-parser": "^1.10.1",
     "express": "~4.9.x",
     "jade": "*",
+    "le_node": "^1.1.1",
     "querystring": "*",
     "request": "*",
     "socket.io": "^1.3.7"

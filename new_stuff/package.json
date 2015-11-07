@@ -1,0 +1,23 @@
+{
+  "name": "chef-ware",
+  "description": "this serves the api and website server for the chef application",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/garyjohnson13/Chef-Ware"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.10.1",
+    "express": "~4.9.x",
+    "jade": "*",
+    "querystring": "*",
+    "request": "*"
+  },
+  "devDependencies": {
+    "mongoose": "^4.1.11"
+  }
+}

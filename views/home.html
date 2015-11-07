@@ -267,12 +267,12 @@ $(document).on("click","#logo-container",function(event){
 
         // if its pausing the timer, "data.type" will be "pause" and "data.seconds" will be null
         // if its resuming the timer, "data.type" will be "resume" and "data.seconds" will be null
-      var thisisatest1 = data.time / 60;
-      var thisisatest2 = data.time % 60;
+        var thisisatest1 = data.seconds / 60;
+        var thisisatest2 = data.seconds % 60;
 
                                 $(function(){
                                     $('#ms_timer').countdowntimer({
-                                        minutes : thisisatest1,
+                                        minutes : Math.floor(thisisatest1),
                                         seconds : thisisatest2,
                                         size : "lg"
                                     });

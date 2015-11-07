@@ -105,6 +105,8 @@ io.on('connection', function(socket){
     var return_id = client_mappings[data.username];
     id_to_socket[return_id] = socket;
 
+    console.log('update & returned socket');
+
     // sending the id back to the client webpage (so it doesnt change every pageload)
     socket.emit('receive_id', { id: return_id });
   });

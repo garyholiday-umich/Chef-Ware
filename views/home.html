@@ -216,6 +216,7 @@ function capitalizeFirstLetter(string) {
 
 
     socket.on('receive_id', function(data) {
+      alert("hit!");
       update_obj = {};
       update_obj.user_id = data.id;
       update_obj.recipe = ra.Title;

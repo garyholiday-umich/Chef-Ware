@@ -207,29 +207,6 @@ function capitalizeFirstLetter(string) {
   <script src="js/init.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script>
-    // generating a random id
-    function makeid()
-    {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        for(var i=0; i < 5; i++ )
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-        return text;
-    }
-    // joining the io socket
-    var socket = io();
-    var my_name = "ishbaid";
-    var id = makeid();
-
-    console.log("clients id is: " + id);
-
-    var update_obj = {};
-    update_obj.user_id = id;
-    update_obj.recipe = ra.Title;
-
-    socket.emit('join', { username: my_name, user_id: id });
 
     socket.on('timer_update', function(data) {
         alert(JSON.stringify(data, null, 2));
@@ -252,6 +229,7 @@ function capitalizeFirstLetter(string) {
     //   "recipe": "teriyaki-chicken"
     // };
     // socket.emit('user update', update_obj);
+    
   </script>
 
   </body>

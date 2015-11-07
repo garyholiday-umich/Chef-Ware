@@ -14,9 +14,7 @@
     "le_node": "^1.1.1",
     "querystring": "*",
     "request": "*",
-    "socket.io": "^1.3.7"
-  },
-  "devDependencies": {
+    "socket.io": "^1.3.7",
     "mongoose": "^4.1.11"
   }
 }

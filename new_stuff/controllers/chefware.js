@@ -8,8 +8,8 @@ exports.getUserProgress = function(event, res) {
 
     console.log(url_params);
 
-    var user_id_in = url_params[1];
-    var recipe_in = url_params[2];
+    var user_id_in = url_params[2];
+    var recipe_in = url_params[3];
 
     UserProgress.find({ user_id: user_id_in, recipe: recipe_in }, { "keywords": 0 }, function(err, userProgress) {
     	if (err) {

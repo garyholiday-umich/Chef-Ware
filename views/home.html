@@ -270,14 +270,22 @@ $(document).on("click","#logo-container",function(event){
         var thisisatest1 = data.seconds / 60;
         var thisisatest2 = data.seconds % 60;
 
-                                $(function(){
-                                    $('#ms_timer').countdowntimer({
-                                        minutes : Math.floor(thisisatest1),
-                                        seconds : thisisatest2,
-                                        size : "lg"
-                                    });
-                                });
-
+        if(data.type == "pause") {
+          clearInterval(window['timer_MSms_timer']);
+          console.log("Good");
+        }
+        else if(data.type == "resume") {
+          
+        }
+        else {
+          $(function(){
+            $('#ms_timer').countdowntimer({
+              minutes : Math.floor(thisisatest1),
+              seconds : thisisatest2,
+              size : "lg"
+            });
+          });
+        }
 
     });
 

@@ -157,7 +157,7 @@ io.on('connection', function(socket){
       delete id_to_socket[delete_id];
 
       // taking the entry out of mongodb
-      UserProgress.find({ id: delete_id }).remove( function(err) {
+      UserProgress.find({ user_id: delete_id }).remove( function(err) {
         if (err)
           console.log('couldn\'t delete the document!');
         else 
@@ -167,8 +167,8 @@ io.on('connection', function(socket){
       // *** UNCOMMENT when we can add usernames for each user ***
       for (var key in client_mappings) {
         if (client_mappings[key] === delete_id) {
-          console.log('removing ' + delete_username + ' from mongodb & server');
           delete_username = key;
+          console.log('removing ' + delete_username + ' from mongodb & server');
           delete client_mappings[key];
           break;
         }

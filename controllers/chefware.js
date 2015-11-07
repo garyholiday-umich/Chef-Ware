@@ -57,7 +57,7 @@ exports.updateTimer = function(event, res) {
     }
 
     // check to see if we need to start or pause the timer.
-    id_to_socket[user_id_in].emit('timer_update', { timer: event.body.seconds, type: event.body.type } );
+    id_to_socket[user_id_in].emit('timer_update', event );
     res.send(200, "timer was successfully updated");
 };
 

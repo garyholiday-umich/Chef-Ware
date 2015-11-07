@@ -9,8 +9,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 </head>
 
@@ -224,7 +224,7 @@ function capitalizeFirstLetter(string) {
     var id = makeid();
 
     var update_obj = {};
-    updat_obj.user_id = id;
+    update_obj.user_id = id;
     update_obj.recipe = ra.Title;
 
     socket.emit('join', { username: my_name, user_id: id });

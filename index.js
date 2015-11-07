@@ -59,6 +59,10 @@ app.set('views', __dirname + '/views');
 // ACTUAL ROUTES
 
 app.get('/', function(req, res) {
+  res.render('index', {});
+});
+
+app.get('/search', function(req, res) {
 
 	// do server side parsing / api requests, then send it to webpage
   log.info("rendering the first page,,,, LOL!!!");
@@ -70,6 +74,7 @@ app.get('/home', function(req, res) {
 	// do server side parsing / api requests, then send it to webpage
   res.render('home', {ra: req.query.id});
 });
+
 
 // ************ SOCKET IO INTEGRATION *********************
 client_mappings = {};

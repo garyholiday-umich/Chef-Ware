@@ -25,12 +25,20 @@
 #yolo {
   font-size:30px;
   margin-top:50px;
+  width:900px;
+  margin: 0px auto;
+}
+
+#yolo_mom {
+  width:900px;
+  margin: 0px auto;
 }
 
 #ingred {
-  
   overflow: scroll;
-
+  z-index:100; height:300px; display:none;
+  width:900px;
+  margin: 0px auto;
 }
 
 .card-header {
@@ -41,12 +49,6 @@
   line-height: 50px; 
   font-size:20px;
   color:#333;
-}
-
-.ingred_box {
-  width: auto;
-  height:200px;
-  float:left;
 }
 
 footer {

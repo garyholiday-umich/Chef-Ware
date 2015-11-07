@@ -3,12 +3,13 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+  <title>Chef Ware</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
 </head>
 
@@ -23,21 +24,29 @@ window.onload = function() {
   console.log(res);
 
 
-  $("#ingred").append('<div class="ingred_box"><ul>');
+  $("#ingred").append('<ul>');
 
   // display ingrediants
   for(var q = 0; q < ingrediants.length; q++) {
-    
-    // check if we printed out 5 things
-    if(q % 5 == 0) {
-      $("#ingred").append("</ul></div>");
-      $("#ingred").append('<div class="ingred_box"><ul>');
-    }
-    $("#ingred").append("<li>" + ingrediants[q].Name + "</li>");
+
+  	// check if units is null
+  	if(ingrediants[q].Unit){
+  		var unit = " " + ingrediants[q].Unit;
+  	}
+  	else {
+  		unit = "";
+  	}
+  	// check if Display Quantity
+  	if(ingrediants[q].DisplayQuantity) {
+      var display = ingrediants[q].DisplayQuantity;
+  	}
+  	else {
+  		display = "";
+  	}
+    $("#ingred").append("<li>" + display + unit + " "+ capitalizeFirstLetter(ingrediants[q].Name) + "</li>");
   }
 
-
-  $("#ingred").append("</ul></div>");
+  $("#ingred").append("</ul>");
 
   // remove last element becuase its empty
   res.pop();
@@ -66,11 +75,13 @@ document.onkeydown = function(e) {
     switch(e.which || e.keyCode) {
         case 37: // left
             
+            if($("#instuc").is(':visible')) {
             // check if we are at not first instruction
-            if(currentInstruction  != 0) {
-              currentInstruction -= 1;
-              document.getElementById("yolo").innerHTML = res[currentInstruction];
-              document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
+              if(currentInstruction  != 0) {
+                currentInstruction -= 1;
+                document.getElementById("yolo").innerHTML = res[currentInstruction];
+                document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
+              }
             }
 
         break;
@@ -81,12 +92,15 @@ document.onkeydown = function(e) {
         break;
 
         case 39: // right
+
+          if($("#instuc").is(':visible')) {
         
-          // check if we are at the end of the instruction
-          if(currentInstruction  != res.length - 1) {
-            currentInstruction += 1;
-            document.getElementById("yolo").innerHTML = res[currentInstruction];
-            document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
+            // check if we are at the end of the instruction
+            if(currentInstruction  != res.length - 1) {
+              currentInstruction += 1;
+              document.getElementById("yolo").innerHTML = res[currentInstruction];
+              document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
+            }
           }
 
         break;
@@ -101,6 +115,10 @@ document.onkeydown = function(e) {
     }
     e.preventDefault(); // prevent the default action (scroll / move caret)
 };
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 </script>
 
@@ -121,19 +139,27 @@ document.onkeydown = function(e) {
   </nav>
 
   <!-- Content -->
-<div class="container" style="min-height:400px;">
 
     <div class="row" style="margin-top:100px;">
-      <div class="col m12 m5" style="z-index:100; height:100px; display:none;" id="ingred">
-      </div>
-      <div class="col m12 m5" id="instuc">
-        <div class="card-header" id="yolo_mom"></div>
-          <div class="" id="yolo">
-
-          </div>
+      <div class="col m12 m5 instuc">
+      	<div id="ingred">
+      	</div>
       </div>
     </div>
-</div>
+
+    <div class="row" id="instuc">
+      <div class="col m12 m5">
+        <div class="card-header" id="yolo_mom">
+        </div>
+      </div>
+      <div class="col m12 m5">
+      	<div id="yolo">
+      	</div>
+      </div>
+  </div>
+
+
+
 
   <!-- Footer -->
   <footer class="page-footer red">
@@ -146,7 +172,8 @@ document.onkeydown = function(e) {
 
 
   <!--  Scripts-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="../../bin/materialize.js"></script>
   <script src="js/init.js"></script>
 

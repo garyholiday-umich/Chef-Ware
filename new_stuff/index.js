@@ -47,9 +47,6 @@ app.set('views', __dirname + '/views');
 
 
 
-
-
-
 // ACTUAL ROUTES
 
 app.get('/', function(req, res) {

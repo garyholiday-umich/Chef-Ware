@@ -16,7 +16,7 @@
 
     //Definition of private function countdown.
     function countdown($this, options) {
-        var opts = $.extend({}, $.fn.countdowntimer.defaults, options);
+        opts = $.extend({}, $.fn.countdowntimer.defaults, options);
         var $this = $this;
         $this.addClass("style");
         var size = "";

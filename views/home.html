@@ -114,12 +114,11 @@ document.onkeydown = function(e) {
               if(currentInstruction  != 0) {
                 currentInstruction -= 1;
 
-              $("#yolo").hide("slide", { direction: "right" }, 100, function() {
+              $("#yolo").hide("slide", { direction: "right" }, 200, function() {
                 document.getElementById("yolo").innerHTML = res[currentInstruction];
                 $("#yolo").show("slide", { direction: "left" }, 500);
               });;
 
-                document.getElementById("yolo").innerHTML = res[currentInstruction];
                 document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
 
                 // update mongo
@@ -146,10 +145,11 @@ document.onkeydown = function(e) {
             if(currentInstruction  != res.length - 1) {
               currentInstruction += 1;
 
-              $("#yolo").hide("slide", { direction: "left" }, 100, function() {
+              $("#yolo").hide("slide", { direction: "left" }, 200, function() {
                 document.getElementById("yolo").innerHTML = res[currentInstruction];
                 $("#yolo").show("slide", { direction: "right" }, 500);
               });;
+
               document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
 
               // update mongo

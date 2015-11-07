@@ -65,7 +65,7 @@ app.get('/', function(req, res) {
 app.get('/search', function(req, res) {
 
 	// do server side parsing / api requests, then send it to webpage
-  res.render('search', {ra: "Teriyaki Chicken"} );
+  res.render('search', {ra: req.query.keywords} );
 });
 
 app.get('/recipe', function(req, res) {
@@ -137,7 +137,6 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function() {
 
-    console.log('lets delete the user\'s entry in the database');
 
     // finding the username & user_id
     var delete_id = "null";
@@ -154,6 +153,7 @@ io.on('connection', function(socket){
 
       // if we're going to another page in our app, don't delete this clients info
       if (keep_ids[delete_id]) {
+        console.log('saving ' + delete_id);
         delete keep_ids[delete_id]; 
         return;
       }

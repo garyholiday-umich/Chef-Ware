@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-KELLY <333333
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ninestars bootstrap 3 one page template</title>
+    <title>Chef Ware</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="landing/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -375,10 +375,12 @@ KELLY <333333
 	<div id="search">
 	    <button type="button" class="close">×</button>
 	    <form>
-	        <input type="search" value="" placeholder="dish name" />
-	        <button type="submit" class="btn btn-primary">Search</button>
+	        <input id="search-term" type="search" value="" placeholder="dish name" />
+	        <button id="search-button" type="submit" class="btn btn-primary" >Search</button>
 	    </form>
 	</div>
+
+
 
 	<footer>
 		<div class="container">
@@ -407,6 +409,38 @@ KELLY <333333
     <!-- Custom Theme JavaScript -->
     <script src="landing/js/custom.js"></script>
     <script src="landing/js/searchBar.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+
+    <script>
+
+  	// generating a random id
+    function makeid()
+    {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for(var i=0; i < 5; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
+    // joining the io socket
+    var socket = io();
+    var my_name = "ishbaid";
+    var id = makeid();
+
+    console.log("clients id is: " + id);
+
+    socket.emit('join', { username: my_name, user_id: id });
+    
+    // going to the correct page on search
+	$("#search-button").click(function(event) {
+		var keywords = $("#search-term").val();
+		socket.emit('keep-id', { user_id: id });
+		window.location = '/search?keywords=' + keywords;
+	});
+
+	</script>
 
 </body>
 

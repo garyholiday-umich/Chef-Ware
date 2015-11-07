@@ -87,9 +87,14 @@ window.onload = function() {
                   if(res[i] == "" || res[i] == " ") {
                     res.splice(i, 1);
                   }
-
-
                   console.log(res[i]);
+
+                  // update the update object to be the first one
+                  if (i === 0) {
+                    update_obj.current_step = 1;
+                    update_obj.description = res[i];
+                    socket.emit('user update', update_obj);
+                  }
                 }
 
                 // variable to keep track of current instruction
@@ -98,7 +103,6 @@ window.onload = function() {
                 // print out the first instructions
                 document.getElementById("yolo").innerHTML = res[currentInstruction];
                 document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
-
 
         }
     });
@@ -252,15 +256,15 @@ $(document).on("click","#logo-container",function(event){
 
 
     socket.on('receive_id', function(data) {
-      alert("hit!");
+      // alert("hit!");
       update_obj = {};
       update_obj.user_id = data.id;
 
-      alert(JSON.stringify(update_obj, null, 2));
+      // alert(JSON.stringify(update_obj, null, 2));
     });
 
     socket.on('timer_update', function(data) {
-        alert(JSON.stringify(data, null, 2));
+        // alert(JSON.stringify(data, null, 2));
         // gary <3 this is where we would put the code to update 
         // the javascript timer on the page.
         // if its starting the timer, "data.type" will be "start" and "data.seconds" will be an integer

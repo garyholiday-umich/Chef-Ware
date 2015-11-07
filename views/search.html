@@ -34,15 +34,9 @@ window.onload = function() {
                   + titleKeyword 
                   + "&api_key="+apiKey;
 
-      // $('a').on('click', function(event) {
-      //   alert("polygamy");
-      //   event.preventDefault();
-      //   socket.emit('keep-id', { user_id: id });
-      // });
-
       $(document).on("click","a",function(event){
         event.preventDefault();
-        socket.emit('keep-id', { user_id: id }); 
+        socket.emit('keep-id', { user_id: my_id }); 
         window.location = $(this).attr('href');
        });
 
@@ -121,28 +115,19 @@ window.onload = function() {
   <script src="js/init.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script>
-  // generating a random id
-    function makeid()
-    {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        for(var i=0; i < 5; i++ )
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-        return text;
-    }
-    // joining the io socket
+  // defining socket io to connect to the same user_id as before
     var socket = io();
     var my_name = "ishbaid";
-    var id = makeid();
+    var my_id = "";
 
-    console.log("clients id is: " + id);
+    socket.emit('updateSocket and getUserID', { username: my_name });
 
-    
+    socket.on('receive_id', function(data) {
+      my_id = data.id;
+    });
 
-    socket.emit('join', { username: my_name, user_id: id });
   </script>
+  
 
   </body>
 </html>

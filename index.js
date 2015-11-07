@@ -12,7 +12,9 @@ var log = new Logger({
 });
 
 // parse application/json
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 require('./models/userProgress');
 require('./routes')(app);

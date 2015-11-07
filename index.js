@@ -65,16 +65,14 @@ app.get('/', function(req, res) {
 app.get('/search', function(req, res) {
 
 	// do server side parsing / api requests, then send it to webpage
-  log.info("rendering the first page,,,, LOL!!!");
-  res.render('search', {ra: "Teriyaki Chicken"});
+  res.render('search', {ra: "Teriyaki Chicken"} );
 });
 
-app.get('/home', function(req, res) {
+app.get('/recipe', function(req, res) {
 
 	// do server side parsing / api requests, then send it to webpage
-  res.render('home', {ra: req.query.id});
+  res.render('recipe', {ra: req.query.id} );
 });
-
 
 // ************ SOCKET IO INTEGRATION *********************
 client_mappings = {};

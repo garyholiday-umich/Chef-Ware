@@ -60,7 +60,7 @@ app.get('/', function(req, res) {
 
 	// do server side parsing / api requests, then send it to webpage
   log.info("rendering the first page,,,, LOL!!!");
-  res.render('search', {ra: "pizza"});
+  res.render('search', {ra: "Teriyaki Chicken"});
 });
 
 app.get('/home', function(req, res) {

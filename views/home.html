@@ -9,12 +9,14 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/jquery.countdownTimer.css" />
 
 </head>
 
 <script type="text/javascript">
+
 window.onload = function() {
 
    var apiKey = "G5a62k9YEgh62xRZV1H6WklJ79hnjvOu";
@@ -195,6 +197,7 @@ function capitalizeFirstLetter(string) {
   </nav>
 
   <!-- Content -->
+  <div id="countdowntimer"><span id="ms_timer"><span></div>
 
     <div class="row" style="margin-top:100px;">
       <div class="col m12 m5 instuc">
@@ -231,6 +234,7 @@ function capitalizeFirstLetter(string) {
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script type="text/javascript" src="js/jquery.countdownTimer.js"></script>
   <script>
 
     // defining socket io to connect to the same user_id as before
@@ -256,6 +260,18 @@ function capitalizeFirstLetter(string) {
 
         // if its pausing the timer, "data.type" will be "pause" and "data.seconds" will be null
         // if its resuming the timer, "data.type" will be "resume" and "data.seconds" will be null
+      var thisisatest1 = data.time / 60;
+      var thisisatest2 = data.time % 60;
+
+                                $(function(){
+                                    $('#ms_timer').countdowntimer({
+                                        minutes : thisisatest1,
+                                        seconds : thisisatest2,
+                                        size : "lg"
+                                    });
+                                });
+
+
     });
 
     // ************** TESTING WITH CURL **************

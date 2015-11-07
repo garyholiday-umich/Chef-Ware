@@ -101,14 +101,13 @@ io.on('connection', function(socket){
   // when the user goes to a different step
   socket.on('updateSocket and getUserID', function(data) {
 
-    var query = { 'user_id': update.user_id };
     var return_id = client_mappings[data.username];
     id_to_socket[return_id] = socket;
 
     console.log('update & returned socket');
 
     // sending the id back to the client webpage (so it doesnt change every pageload)
-    id_to_socket[user_id_in].emit('receive_id', { id: return_id });
+    socket.emit('receive_id', { id: return_id });
   });
 
   // when the user goes to a different step
@@ -126,6 +125,11 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function(){
     console.log('lets delete the user\'s entry in the database');
+
+    // finding the username & user_id
+    var delete_id;
+    // for (var )
+
     // UserProgress.find({ id: user_id}).remove( function(err) {
     // 	if (err)
     // 		console.log('couldn\'t delete the document!');

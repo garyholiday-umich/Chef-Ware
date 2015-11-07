@@ -18,6 +18,7 @@
 window.onload = function() {
 
    var apiKey = "G5a62k9YEgh62xRZV1H6WklJ79hnjvOu";
+   update_obj = {};
         var recipeId = ra;
         var url = "http://api.bigoven.com/recipe/" + recipeId + "?api_key=" + apiKey;
         $.ajax({
@@ -27,62 +28,63 @@ window.onload = function() {
             url: url,
             success: function (ra) {
 
-
+              console.log(ra.Title);
+              update_obj.recipe = ra.Title;
 
              // grab the instructions
-        res = ra.Instructions.split(".");
-        ingrediants = ra.Ingredients;
+            res = ra.Instructions.split(".");
+            ingrediants = ra.Ingredients;
 
-        $("#ingred").append('<ul>');
+            $("#ingred").append('<ul>');
 
-       // display ingrediants
-       for(var q = 0; q < ingrediants.length; q++) {
+           // display ingrediants
+           for(var q = 0; q < ingrediants.length; q++) {
 
-  	     // check if units is null
-  	     if(ingrediants[q].Unit){
-  		    var unit = " " + ingrediants[q].Unit;
-  	      }
-  	      else {
-  		    unit = "";
-  	      }
-  	      // check if Display Quantity
-  	      if(ingrediants[q].DisplayQuantity) {
-             var display = ingrediants[q].DisplayQuantity;
-  	       }
-  	       else {
-  		     display = "";
-  	       }
-             $("#ingred").append("<li>" + display + unit + " "+ capitalizeFirstLetter(ingrediants[q].Name) + "</li>");
-           }
+      	     // check if units is null
+      	     if(ingrediants[q].Unit){
+      		    var unit = " " + ingrediants[q].Unit;
+      	      }
+      	      else {
+      		    unit = "";
+      	      }
+      	      // check if Display Quantity
+      	      if(ingrediants[q].DisplayQuantity) {
+                 var display = ingrediants[q].DisplayQuantity;
+      	       }
+      	       else {
+      		     display = "";
+      	       }
+                 $("#ingred").append("<li>" + display + unit + " "+ capitalizeFirstLetter(ingrediants[q].Name) + "</li>");
+               }
 
-           $("#ingred").append("</ul>");
-
-
-           // remove last element becuase its empty
-           res.pop();
-
-           // add the final message
-           res.push("Enjoy your " + ra.Title);
-  
-           // loop through results and trim white space
-           for(var i = 0; i < res.length; i++) {
-              res[i] = res[i].trim();
-
-              // remove elemnt from the array if it is empty
-              if(res[i] == "" || res[i] == " ") {
-                res.splice(i, 1);
-              }
+               $("#ingred").append("</ul>");
 
 
-              console.log(res[i]);
-            }
+               // remove last element becuase its empty
+               res.pop();
 
-            // variable to keep track of current instruction
-            currentInstruction = 0;
+               // add the final message
+               res.push("Enjoy your " + ra.Title);
+      
+               // loop through results and trim white space
+               for(var i = 0; i < res.length; i++) {
+                  res[i] = res[i].trim();
 
-            // print out the first instructions
-            document.getElementById("yolo").innerHTML = res[currentInstruction];
-            document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
+                  // remove elemnt from the array if it is empty
+                  if(res[i] == "" || res[i] == " ") {
+                    res.splice(i, 1);
+                  }
+
+
+                  console.log(res[i]);
+                }
+
+                // variable to keep track of current instruction
+                currentInstruction = 0;
+
+                // print out the first instructions
+                document.getElementById("yolo").innerHTML = res[currentInstruction];
+                document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
 
 
         }
@@ -217,7 +219,7 @@ function capitalizeFirstLetter(string) {
 
     socket.on('receive_id', function(data) {
       alert("hit!");
-      update_obj = {};
+      // update_obj = {};
       update_obj.user_id = data.id;
       update_obj.recipe = ra.Title;
 

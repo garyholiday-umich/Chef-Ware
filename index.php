@@ -250,7 +250,9 @@
   }';
 
 $json_a = json_decode($jsonYo, true);
-echo $json_a['Ingredients'];
+for ($i = 0; i < sizeof($json_a['Ingredients']); $i++) {
+  $json_a['Ingredients'][i];
+}
 
 
 

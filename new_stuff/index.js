@@ -45,11 +45,22 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 
+
+
+
+
+
 // ACTUAL ROUTES
 
 app.get('/', function(req, res) {
+	// do server side parsing / api requests, then send it to webpage
   res.render('home', {title: 'home', recipe: "an object"});
 });
+
+
+
+
+
 
 
 // ************************ Listening on Port 8080 ******************

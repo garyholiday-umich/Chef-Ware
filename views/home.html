@@ -30,8 +30,19 @@ window.onload = function() {
               console.log(ra.Title);
               update_obj.recipe = ra.Title;
 
+              console.log(ra.Instructions);
+
              // grab the instructions
-            res = ra.Instructions.split(".");
+            theInstructions = ra.Instructions;
+            // go through instructions and if we find an abrievation fix it
+            theInstructions = theInstructions.replace("sec.", "seconds");
+            theInstructions = theInstructions.replace("min.", "minutes");
+            theInstructions = theInstructions.replace("approx.", "approximately");
+            theInstructions = theInstructions.replace(".)", ").");
+            theInstructions = theInstructions.replace("...", ".");
+
+            // go through instructions and split everyone at the period
+            res = theInstructions.split(".");
             ingrediants = ra.Ingredients;
 
             $("#ingred").append('<ul>');
@@ -101,7 +112,12 @@ document.onkeydown = function(e) {
             // check if we are at not first instruction
               if(currentInstruction  != 0) {
                 currentInstruction -= 1;
+
+              $("#yolo").hide("slide", { direction: "right" }, 200, function() {
                 document.getElementById("yolo").innerHTML = res[currentInstruction];
+                $("#yolo").show("slide", { direction: "left" }, 500);
+              });;
+
                 document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
 
                 // update mongo
@@ -114,8 +130,10 @@ document.onkeydown = function(e) {
         break;
 
         case 38: // up
-          $("#ingred").slideToggle()
-          $("#instuc").slideToggle()
+
+            $("#ingred").slideUp(500);
+            $("#instuc").slideDown(500);
+
         break;
 
         case 39: // right
@@ -125,7 +143,12 @@ document.onkeydown = function(e) {
             // check if we are at the end of the instruction
             if(currentInstruction  != res.length - 1) {
               currentInstruction += 1;
-              document.getElementById("yolo").innerHTML = res[currentInstruction];
+
+              $("#yolo").hide("slide", { direction: "left" }, 200, function() {
+                document.getElementById("yolo").innerHTML = res[currentInstruction];
+                $("#yolo").show("slide", { direction: "right" }, 500);
+              });;
+
               document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
 
               // update mongo
@@ -138,8 +161,9 @@ document.onkeydown = function(e) {
         break;
 
         case 40: // down
-          $("#ingred").slideToggle()
-          $("#instuc").slideToggle()
+
+            $("#ingred").slideDown(500);
+            $("#instuc").slideUp(500);
 
         break;
 
@@ -197,7 +221,7 @@ function capitalizeFirstLetter(string) {
   <footer class="page-footer red">
     <div class="footer-copyright">
       <div class="container">
-      This is a footer
+      Foooooood. Yum
       </div>
     </div>
   </footer>

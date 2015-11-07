@@ -176,13 +176,19 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+$(document).on("click","#logo-container",function(event){
+  event.preventDefault();
+  socket.emit('keep-id', { user_id: update_obj.user_id }); 
+  window.history.back();
+ });
+
 </script>
 
 <body>
 
   <!-- Nav bar -->
   <nav class="red" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Chef Ware</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Chef Ware</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#"></a></li>
       </ul>

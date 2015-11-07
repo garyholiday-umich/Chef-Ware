@@ -134,46 +134,46 @@ io.on('connection', function(socket){
 
     console.log('lets delete the user\'s entry in the database');
 
-    // // finding the username & user_id
-    // var delete_id = "null";
-    // var delete_username = "null";
-    // for (var key in id_to_socket) {
-    //   if (id_to_socket[key] === socket) {
-    //     delete_id = key;
-    //     break;
-    //   }
-    // }
+    // finding the username & user_id
+    var delete_id = "null";
+    var delete_username = "null";
+    for (var key in id_to_socket) {
+      if (id_to_socket[key] === socket) {
+        delete_id = key;
+        break;
+      }
+    }
 
-    // // making sure we found one, then taking out the socket
-    // if (delete_id != "null") {
+    // making sure we found one, then taking out the socket
+    if (delete_id != "null") {
 
-    //   // if we're going to another page in our app, don't delete this clients info
-    //   if (keep_ids[delete_id]) {
-    //     delete keep_ids[delete_id]; 
-    //     return;
-    //   }
+      // if we're going to another page in our app, don't delete this clients info
+      if (keep_ids[delete_id]) {
+        delete keep_ids[delete_id]; 
+        return;
+      }
 
-    //   console.log('deleting ' + delete_id);
-    //   delete id_to_socket[delete_id];
+      console.log('deleting ' + delete_id);
+      delete id_to_socket[delete_id];
 
-    //   // taking the entry out of mongodb
-    //   UserProgress.find({ id: delete_id }).remove( function(err) {
-    //     if (err)
-    //       console.log('couldn\'t delete the document!');
-    //     else 
-    //       console.log('successfully deleted ' + delete_id);
-    //   });
+      // taking the entry out of mongodb
+      UserProgress.find({ id: delete_id }).remove( function(err) {
+        if (err)
+          console.log('couldn\'t delete the document!');
+        else 
+          console.log('successfully deleted ' + delete_id);
+      });
 
-    //   // *** UNCOMMENT when we can add usernames for each user ***
-    //   for (var key in client_mappings) {
-    //     if (client_mappings[key] === delete_id) {
-    //       console.log('removing ' + delete_username + ' from mongodb & server');
-    //       delete_username = key;
-    //       delete client_mappings[key];
-    //       break;
-    //     }
-    //   }
-    // }
+      // *** UNCOMMENT when we can add usernames for each user ***
+      for (var key in client_mappings) {
+        if (client_mappings[key] === delete_id) {
+          console.log('removing ' + delete_username + ' from mongodb & server');
+          delete_username = key;
+          delete client_mappings[key];
+          break;
+        }
+      }
+    }
   });
 });
 

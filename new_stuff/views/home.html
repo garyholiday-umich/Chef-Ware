@@ -1,8 +1,118 @@
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Starter Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+<script type="text/javascript">
+window.onload = function() {
+
+  // grab the instructions
+  res = ra.Instructions.split(".");
+
+  console.log(res);
+
+  // remove last element becuase its empty
+  res.pop();
+  
+  // loop through results and trim white space
+  for(var i = 0; i < res.length; i++) {
+    res[i] = res[i].trim();
+    console.log(res[i]);
+  }
+
+  // variable to keep track of current instruction
+  currentInstruction = 0;
+
+  // print out the first instructions
+  document.getElementById("yolo").innerHTML = res[currentInstruction];
+
+};
+
+// code to register key strokes
+document.onkeydown = function(e) {
+    e = e || window.event;
+    switch(e.which || e.keyCode) {
+        case 37: // left
+            
+            // check if we are at not first instruction
+            if(currentInstruction  != 0) {
+              currentInstruction -= 1;
+              document.getElementById("yolo").innerHTML = res[currentInstruction];
+            }
+
+        break;
+
+        case 38: // up
+        break;
+
+        case 39: // right
+        
+          // check if we are at the end of the instruction
+          if(currentInstruction  == res.length - 1) {
+            document.getElementById("yolo").innerHTML = "Enjoy your " + ra.Title;
+          }
+          else {
+            currentInstruction += 1;
+            document.getElementById("yolo").innerHTML = res[currentInstruction];
+          }
+
+        break;
+
+        case 40: // down
+        break;
+
+        default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
+};
+
+</script>
+
 <body>
-  <h1>where's my dad?!?!?!?!?</h1>
-  <script>
-    window.onload = function() {
-      console.log(recipe);
-    };
-  </script>
-</body>
+
+  <!-- Nav bar -->
+  <nav class="red" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">ChefWare</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#"></a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#"></a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+<div class="container" style="height:600px;" id="yolo">
+
+
+
+</div>
+
+  <!-- Footer -->
+  <footer class="page-footer red">
+    <div class="footer-copyright">
+      <div class="container">
+      This is a footer
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="../../bin/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>

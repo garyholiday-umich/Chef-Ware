@@ -22,9 +22,11 @@ window.onload = function() {
                   + titleKeyword 
                   + "&api_key="+apiKey;
 
-      function keepId() {
+      $('a').on('click', function(event) {
+        alert("");
+        event.preventDefault();
         socket.emit('keep-id', { user_id: id });
-      };
+      });
 
       $.ajax({
                type: "GET",
@@ -47,7 +49,7 @@ window.onload = function() {
                                            '<p>' + data.Results[i].Subcategory + '</p>' +
                                          '</div>' +
                                          '<div class="card-action">' +
-                                           '<a onclick="keepId()" href="/home?id=' + data.Results[i].RecipeID + '">Get Recipe</a>' +
+                                           '<a href="/home?id=' + data.Results[i].RecipeID + '">Get Recipe</a>' +
                                          '</div>' +
                                        '</div>' +
                                      '</div>' +

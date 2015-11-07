@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
 </head>
 
 <script type="text/javascript">
@@ -16,11 +17,33 @@ window.onload = function() {
 
   // grab the instructions
   res = ra.Instructions.split(".");
+  ingrediants = ra.Ingredients;
 
+  console.log(ingrediants);
   console.log(res);
+
+
+  $("#ingred").append('<div class="ingred_box"><ul>');
+
+  // display ingrediants
+  for(var q = 0; q < ingrediants.length; q++) {
+    
+    // check if we printed out 5 things
+    if(q % 5 == 0) {
+      $("#ingred").append("</ul></div>");
+      $("#ingred").append('<div class="ingred_box"><ul>');
+    }
+    $("#ingred").append("<li>" + ingrediants[q].Name + "</li>");
+  }
+
+
+  $("#ingred").append("</ul></div>");
 
   // remove last element becuase its empty
   res.pop();
+
+  // add the final message
+  res.push("Enjoy your " + ra.Title);
   
   // loop through results and trim white space
   for(var i = 0; i < res.length; i++) {
@@ -33,6 +56,7 @@ window.onload = function() {
 
   // print out the first instructions
   document.getElementById("yolo").innerHTML = res[currentInstruction];
+  document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
 
 };
 
@@ -46,27 +70,31 @@ document.onkeydown = function(e) {
             if(currentInstruction  != 0) {
               currentInstruction -= 1;
               document.getElementById("yolo").innerHTML = res[currentInstruction];
+              document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
             }
 
         break;
 
         case 38: // up
+          $("#ingred").slideToggle()
+          $("#instuc").slideToggle()
         break;
 
         case 39: // right
         
           // check if we are at the end of the instruction
-          if(currentInstruction  == res.length - 1) {
-            document.getElementById("yolo").innerHTML = "Enjoy your " + ra.Title;
-          }
-          else {
+          if(currentInstruction  != res.length - 1) {
             currentInstruction += 1;
             document.getElementById("yolo").innerHTML = res[currentInstruction];
+            document.getElementById("yolo_mom").innerHTML = "Step " + (currentInstruction + 1) + " of " + res.length;
           }
 
         break;
 
         case 40: // down
+          $("#ingred").slideToggle()
+          $("#instuc").slideToggle()
+
         break;
 
         default: return; // exit this handler for other keys
@@ -93,10 +121,18 @@ document.onkeydown = function(e) {
   </nav>
 
   <!-- Content -->
-<div class="container" style="height:600px;" id="yolo">
+<div class="container" style="min-height:400px;">
 
+    <div class="row" style="margin-top:100px;">
+      <div class="col m12 m5" style="z-index:100; height:100px; display:none;" id="ingred">
+      </div>
+      <div class="col m12 m5" id="instuc">
+        <div class="card-header" id="yolo_mom"></div>
+          <div class="" id="yolo">
 
-
+          </div>
+      </div>
+    </div>
 </div>
 
   <!-- Footer -->
@@ -110,7 +146,7 @@ document.onkeydown = function(e) {
 
 
   <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
   <script src="../../bin/materialize.js"></script>
   <script src="js/init.js"></script>
 

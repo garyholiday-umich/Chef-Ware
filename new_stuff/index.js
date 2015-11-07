@@ -46,7 +46,6 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 
-
 // ACTUAL ROUTES
 
 app.get('/', function(req, res) {

@@ -6,9 +6,61 @@
  * Made By MaterializeCSS.com
  */
 
+ body {      
+    position:fixed;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    height:100%;
+}
+
 .icon-block {
   padding: 0 15px;
 }
 .icon-block .material-icons {
-	font-size: inherit;
+  font-size: inherit;
 }
+
+#yolo {
+  font-size:30px;
+  margin-top:50px;
+}
+
+#ingred {
+  
+  overflow: scroll;
+
+}
+
+.card-header {
+
+  width:100%;
+  height:50px;
+  vertical-align: middle;
+  line-height: 50px; 
+  font-size:20px;
+  color:#333;
+}
+
+.ingred_box {
+  width: auto;
+  height:200px;
+  float:left;
+}
+
+footer {
+	position: absolute;
+	bottom:0px;
+	width: 100%;
+}
+
+
+
+
+
+
+
+
+
+

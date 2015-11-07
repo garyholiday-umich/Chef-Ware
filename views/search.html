@@ -112,9 +112,7 @@ window.onload = function() {
 
     console.log("clients id is: " + id);
 
-    var update_obj = {};
-    update_obj.user_id = id;
-    update_obj.recipe = ra.Title;
+    
 
     socket.emit('join', { username: my_name, user_id: id });
   </script>

@@ -208,6 +208,21 @@ function capitalizeFirstLetter(string) {
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script>
 
+    // defining socket io to connect to the same user_id as before
+    var socket = io();
+    var my_name = "ishbaid";
+
+    socket.emit('updateSocket and getUserID', { username: my_name });
+
+
+    socket.on('receive_id', function(data) {
+      update_obj = {};
+      update_obj.user_id = data.id;
+      update_obj.recipe = ra.Title;
+
+      alert(JSON.stringify(update_obj, null, 2));
+    });
+
     socket.on('timer_update', function(data) {
         alert(JSON.stringify(data, null, 2));
         // gary <3 this is where we would put the code to update 
@@ -229,7 +244,7 @@ function capitalizeFirstLetter(string) {
     //   "recipe": "teriyaki-chicken"
     // };
     // socket.emit('user update', update_obj);
-    
+
   </script>
 
   </body>

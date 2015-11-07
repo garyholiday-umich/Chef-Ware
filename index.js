@@ -95,7 +95,18 @@ io.on('connection', function(socket){
 	    if (err) return res.send(500, { error: err });
 	    console.log("succesfully joined session");
 	    console.log(update);
-	});
+	  });
+  });
+
+  // when the user goes to a different step
+  socket.on('updateSocket and getUserID', function(data) {
+
+    var query = { 'user_id': update.user_id };
+    var return_id = client_mappings[data.username];
+    id_to_socket[return_id] = socket;
+
+    // sending the id back to the client webpage (so it doesnt change every pageload)
+    socket.emit('receive_id', { id: return_id });
   });
 
   // when the user goes to a different step
@@ -105,10 +116,10 @@ io.on('connection', function(socket){
 
     var query = { 'user_id': update.user_id };
 
-	UserProgress.findOneAndUpdate(query, update, function(err, doc){
-	    if (err) return res.send(500, { error: err });
-	    console.log("succesfully saved");
-	});
+  	UserProgress.findOneAndUpdate(query, update, function(err, doc){
+  	    if (err) return res.send(500, { error: err });
+  	    console.log("succesfully saved");
+  	});
   });
 
   socket.on('disconnect', function(){

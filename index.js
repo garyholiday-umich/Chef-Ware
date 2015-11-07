@@ -72,6 +72,7 @@ app.get('/home', function(req, res) {
 // ************ SOCKET IO INTEGRATION *********************
 client_mappings = {};
 id_to_socket = {};
+keep_ids = {};
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -105,9 +106,15 @@ io.on('connection', function(socket){
     id_to_socket[return_id] = socket;
 
     console.log('update & returned socket');
+    console.log('returning ' + return_id);
 
     // sending the id back to the client webpage (so it doesnt change every pageload)
     socket.emit('receive_id', { id: return_id });
+  });
+
+  socket.on('keep-id', function(data) {
+    keep_ids[data.user_id] = true;
+    console.log('keeping this id! ' + data.user_id);
   });
 
   // when the user goes to a different step
@@ -123,21 +130,51 @@ io.on('connection', function(socket){
   	});
   });
 
-  socket.on('disconnect', function(){
+  socket.on('disconnect', function() {
+
     console.log('lets delete the user\'s entry in the database');
 
     // finding the username & user_id
-    var delete_id;
-    // for (var )
+    var delete_id = "null";
+    var delete_username = "null";
+    for (var key in id_to_socket) {
+      if (id_to_socket[key] === socket) {
+        delete_id = key;
+        break;
+      }
+    }
 
-    // UserProgress.find({ id: user_id}).remove( function(err) {
-    // 	if (err)
-    // 		console.log('couldn\'t delete the document!');
-    // 	else 
-    // 		console.log('successfully deleted ' + user_id);
-    // });
+    // making sure we found one, then taking out the socket
+    if (delete_id != "null") {
+
+      // if we're going to another page in our app, don't delete this clients info
+      if (keep_ids[delete_id]) {
+        delete keep_ids[delete_id]; 
+        return;
+      }
+
+      console.log('deleting ' + delete_id);
+      delete id_to_socket[delete_id];
+
+      // taking the entry out of mongodb
+      UserProgress.find({ id: delete_id }).remove( function(err) {
+        if (err)
+          console.log('couldn\'t delete the document!');
+        else 
+          console.log('successfully deleted ' + delete_id);
+      });
+
+      // *** UNCOMMENT when we can add usernames for each user ***
+      for (var key in client_mappings) {
+        if (client_mappings[key] === delete_id) {
+          console.log('removing ' + delete_username + ' from mongodb & server');
+          delete_username = key;
+          delete client_mappings[key];
+          break;
+        }
+      }
+    }
   });
-
 });
 
 // ************************ Listening on Port 8080 ******************

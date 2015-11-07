@@ -7,14 +7,14 @@ var app = express();
 // parse application/json
 app.use(bodyParser.json());
 
-require('./models/constraint');
+require('./models/userProgress');
 require('./routes')(app);
 
 mongoose = require('mongoose'),
 fs = require('fs');
 
 // connecting to the mongodb database
-var mongoUri = 'mongodb://root:dairy-free@ds027744.mongolab.com:27744/what-can-i-eat-database';
+var mongoUri = 'mongodb://chef:boyardi@ds051524.mongolab.com:51524/chefware-db';
 var options = { server: { socketOptions: { connectTimeoutMS: 25000 }}}; // bc our database has a shitty response time.
 
 mongoose.connect(mongoUri, options, function(err) {
@@ -50,7 +50,6 @@ app.set('views', __dirname + '/views');
 app.get('/', function(req, res) {
   res.render('home', {title: 'home', recipe: "an object"});
 });
-
 
 // ************************ Listening on Port 8080 ******************
 app.listen(8080);

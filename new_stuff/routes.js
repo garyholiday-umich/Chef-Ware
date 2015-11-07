@@ -1,5 +1,5 @@
 module.exports = function(app){
-    var restaurants = require('./controllers/restaurants');
-    app.get('/constraints', restaurants.getConstraints);
-    app.get('/constraints/:name', restaurants.getConstraintDetails);
+    var chefware = require('./controllers/chefware');
+    app.get('/:user_id/:recipe', chefware.getUserProgress);
+    app.post('/:user_id/:recipe', chefware.startTimer);
 }

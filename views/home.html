@@ -115,8 +115,10 @@ document.onkeydown = function(e) {
         break;
 
         case 38: // up
-          $("#ingred").slideToggle()
-          $("#instuc").slideToggle()
+
+            $("#ingred").slideUp(500);
+            $("#instuc").slideDown(500);
+
         break;
 
         case 39: // right
@@ -139,8 +141,9 @@ document.onkeydown = function(e) {
         break;
 
         case 40: // down
-          $("#ingred").slideToggle()
-          $("#instuc").slideToggle()
+
+            $("#ingred").slideDown(500);
+            $("#instuc").slideUp(500);
 
         break;
 

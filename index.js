@@ -108,7 +108,7 @@ io.on('connection', function(socket){
     console.log('update & returned socket');
 
     // sending the id back to the client webpage (so it doesnt change every pageload)
-    socket.emit('receive_id', { id: return_id });
+    id_to_socket[user_id_in].emit('receive_id', { id: return_id });
   });
 
   // when the user goes to a different step

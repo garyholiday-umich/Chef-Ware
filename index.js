@@ -4,6 +4,7 @@ var querystring = require('querystring');
 var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').createServer(app);
+var http_obj = require('http');
 io = require('socket.io')(http);
 
 var Logger = require('le_node');
@@ -60,6 +61,10 @@ app.set('views', __dirname + '/views');
 
 app.get('/', function(req, res) {
   res.render('index', {});
+});
+
+app.get('/example', function(req, res) {
+  res.render('example', {});
 });
 
 app.get('/search', function(req, res) {
@@ -136,7 +141,6 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', function() {
-
 
     // finding the username & user_id
     var delete_id = "null";

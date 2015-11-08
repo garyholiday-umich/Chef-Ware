@@ -13,6 +13,11 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/jquery.countdownTimer.css" />
 
+  <!--  WEB SDK DEPS -->
+  <script src='nuance/lib/resampler.js'></script>
+  <script src='nuance/lib/speex.js'></script>
+  <script src='nuance/nuance.js'></script>
+
 </head>
 
 <script type="text/javascript">
@@ -228,24 +233,112 @@ $(document).on("click","#logo-container",function(event){
       </div>
   </div>
 
-
-
-
   <!-- Footer -->
   <footer class="page-footer red">
     <div class="footer-copyright">
       <div class="container">
       Foooooood. Yum
       </div>
+      
     </div>
   </footer>
-
 
   <!--  Scripts-->
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
+  
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script type="text/javascript" src="js/jquery.countdownTimer.js"></script>
+
+  <!-- nuance integration -->
+  <script>
+          //Set these to avoid having to enter them everytime
+          var URL = 'wss://httpapi.labs.nuance.com/v1?';
+
+          var APP_ID = "NMDPTRIAL_mdcopley_umich_edu20151107210458";
+          var APP_KEY = "77d577a4078f6351dfcf3759f1c7341d0802d170bb64dcb5a80c51939d978d146c04b873941cc573ebfcccdcc400f9cc03ca3dbe2e1973d725c46ac25bf7d6c8";
+          var USER_ID = "test";
+          var NLU_TAG = "";
+
+          var userMedia = undefined;
+          navigator.getUserMedia = navigator.getUserMedia
+          || navigator.webkitGetUserMedia
+          || navigator.mozGetUserMedia
+          || navigator.msGetUserMedia;
+
+          if(!navigator.getUserMedia){
+              console.log("No getUserMedia Support in this Browser");
+          }
+          
+          navigator.getUserMedia({
+              audio:true
+          }, function(stream){
+              userMedia = stream;
+          }, function(error){
+              console.error("Could not get User Media: " + error);
+          });
+
+          // APP STATE
+          var isRecording = false;
+
+          // INIT THE SDK
+          Nuance.connect({
+              appId: APP_ID,
+              appKey: APP_KEY,
+              userId: USER_ID,
+              url: URL,
+
+              onopen: function() {
+                  console.log("Websocket Opened");
+                  // $content.addClass('connected');
+              },
+              onclose: function() {
+                  console.log("Websocket Closed");
+                  // $content.removeClass('connected');
+              },
+              onmessage: function(msg) {
+                  console.log(msg);
+                  if(msg.message == "volume") {
+                     viz(msg.volume);
+                  } else if (msg.result_type == "NMDP_TTS_CMD") {
+                      // dLog(JSON.stringify(msg, null, 2), $ttsDebug);
+                  } else if (msg.result_type == "NDSP_ASR_APP_CMD") {
+                      if(msg.nlu_interpretation_results.status === 'success'){
+                          // dLog(JSON.stringify(msg, null, 2), $asrDebug);
+                      } else {
+                          // dLog(JSON.stringify(msg.nlu_interpretation_results.payload.interpretations, null, 2), $asrDebug);
+                      }
+                  } else if (msg.result_type === "NDSP_APP_CMD") {
+                      if(msg.nlu_interpretation_results.status === 'success'){
+                          // dLog(JSON.stringify(msg.nlu_interpretation_results.payload.interpretations, null, 2), $nluDebug);
+                      } else {
+                          // dLog(JSON.stringify(msg, null, 2), $nluDebug);
+                      }
+                  }
+              },
+              onerror: function(error) {
+                  console.error(error);
+                  // $content.removeClass('connected');
+              }
+
+          });
+
+          // Disconnect
+          $(window).unload(function(){
+              Nuance.disconnect();
+          });
+
+          // TTS
+          function tts(description){
+              Nuance.playTTS({
+                  language: 'eng-USA',
+                  voice: 'ava',
+                  text: description
+              });
+          };
+  </script>
+
+  <!-- socket integartion -->
   <script>
 
     // defining socket io to connect to the same user_id as before
@@ -254,13 +347,9 @@ $(document).on("click","#logo-container",function(event){
 
     socket.emit('updateSocket and getUserID', { username: my_name });
 
-
     socket.on('receive_id', function(data) {
-      // alert("hit!");
       update_obj = {};
       update_obj.user_id = data.id;
-
-      // alert(JSON.stringify(update_obj, null, 2));
     });
 
     socket.on('timer_update', function(data) {
@@ -303,17 +392,6 @@ $(document).on("click","#logo-container",function(event){
 
     // ************** TESTING WITH CURL **************
     // ./curl.exe -i -X POST -H 'Content-Type: application/json' -d '{ "seconds": 68, "type": "start" }' http://localhost:8080/api/timer/{user-id}
-
-
-    // var update_obj = {
-    //   "user_id": id,
-    //   "current_step": 2,
-    //   "description": "oh, nerman how r the apples?",
-    //   "recipe": "teriyaki-chicken"
-    // };
-    // socket.emit('user update', update_obj);
-
   </script>
-
   </body>
 </html>

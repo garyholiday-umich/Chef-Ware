@@ -17,7 +17,7 @@
 }
 
 #instuc {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'abel', sans-serif;
 }
 
 .icon-block {
@@ -79,7 +79,7 @@ footer {
 }
 
 #image_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'abel', sans-serif;
   width:300px;
   height: 50px;
   float:left;
@@ -91,7 +91,7 @@ footer {
   float:left;
 }
 #number_of_steps {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'abel', sans-serif;
   width:200px;
   height:40px;
   float:right;
@@ -112,7 +112,7 @@ footer {
 }
 
 #ingredients {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'abel', sans-serif;
   width:300px;
   height:300px;
   float:left;

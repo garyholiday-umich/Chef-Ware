@@ -13,7 +13,7 @@
    font-family: sans-serif;
    font-weight: bold;
    position: absolute;
-   bottom:70px;
+   bottom:100px;
    margin:0px auto;
    z-index: 100;
    text-align: center;
@@ -25,6 +25,6 @@
 }
 
 .size_lg {
-   font-size:40px;
+   font-size:80px;
 }
 

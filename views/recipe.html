@@ -124,6 +124,11 @@ window.onload = function() {
 document.onkeydown = function(e) {
     e = e || window.event;
     switch(e.which || e.keyCode) {
+
+        case 32: // left
+          tts(res[currentInstruction]);
+        break;
+
         case 37: // left
             
             if($("#instuc").is(':visible')) {

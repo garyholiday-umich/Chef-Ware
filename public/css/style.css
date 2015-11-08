@@ -51,9 +51,11 @@
   height:50px;
   vertical-align: middle;
   line-height: 50px; 
-  font-size:30px;
+  font-size:35px;
   color:#333;
   text-align: center;
+  padding-bottom: 10px;
+  font-weight: 600;
 }
 
 footer {

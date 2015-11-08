@@ -17,7 +17,7 @@
 }
 
 #instuc {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'abel', sans-serif;
 }
 
 .icon-block {
@@ -54,7 +54,7 @@
   color:#333;
   padding-bottom: 0px;
   font-weight: 600;
-  border-bottom: 3px solid #333;
+  border-bottom: 3px solid #ef5350;
 }
 
 footer {
@@ -75,15 +75,15 @@ footer {
 
 #logo-container {
   font-family: myFirstFont;
-  font-size:40px;
+  font-size:50px;
 }
 
 #image_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'abel', sans-serif;
   width:300px;
   height: 50px;
   float:left;
-  font-size:28px;
+  font-size:34px;
 }
 #image {
   width: 300px;
@@ -91,12 +91,12 @@ footer {
   float:left;
 }
 #number_of_steps {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'abel', sans-serif;
   width:200px;
   height:40px;
   float:right;
-  font-size:18px;
-  padding-top:15px;
+  font-size:24px;
+  padding-top:10px;
   text-align: right;
 }
 .shell {
@@ -112,11 +112,12 @@ footer {
 }
 
 #ingredients {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'abel', sans-serif;
   width:300px;
   height:300px;
   float:left;
   overflow: scroll;
+  font-size: 24px;
 }
 
 

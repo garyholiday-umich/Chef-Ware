@@ -349,48 +349,8 @@ $(document).on("click","#logo-container",function(event){
               }
           };
 
-          Nuance.connect(connect_obj);
-
           // INIT THE SDK
-          // Nuance.connect({
-          //     appId: APP_ID,
-          //     appKey: APP_KEY,
-          //     userId: USER_ID,
-          //     url: URL,
-
-          //     onopen: function() {
-          //         console.log("Websocket Opened");
-          //         // $content.addClass('connected');
-          //     },
-          //     onclose: function() {
-          //         console.log("Websocket Closed");
-          //         // $content.removeClass('connected');
-          //     },
-          //     onmessage: function(msg) {
-          //         console.log(msg);
-          //         if(msg.message == "volume") {
-          //            viz(msg.volume);
-          //         } else if (msg.result_type == "NMDP_TTS_CMD") {
-          //             // dLog(JSON.stringify(msg, null, 2), $ttsDebug);
-          //         } else if (msg.result_type == "NDSP_ASR_APP_CMD") {
-          //             if(msg.nlu_interpretation_results.status === 'success'){
-          //                 // dLog(JSON.stringify(msg, null, 2), $asrDebug);
-          //             } else {
-          //                 // dLog(JSON.stringify(msg.nlu_interpretation_results.payload.interpretations, null, 2), $asrDebug);
-          //             }
-          //         } else if (msg.result_type === "NDSP_APP_CMD") {
-          //             if(msg.nlu_interpretation_results.status === 'success'){
-          //                 // dLog(JSON.stringify(msg.nlu_interpretation_results.payload.interpretations, null, 2), $nluDebug);
-          //             } else {
-          //                 // dLog(JSON.stringify(msg, null, 2), $nluDebug);
-          //             }
-          //         }
-          //     },
-          //     onerror: function(error) {
-          //         console.error(error);
-          //         // $content.removeClass('connected');
-          //     }
-          // });
+          Nuance.connect(connect_obj);
 
           // Disconnect
           $(window).unload(function(){

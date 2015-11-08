@@ -270,6 +270,9 @@ $(document).on("click","#logo-container",function(event){
   <script type="text/javascript" src="js/jquery.countdownTimer.js"></script>
   <script>
 
+    //check if clock is running
+    isrunning = false;
+
     // defining socket io to connect to the same user_id as before
     var socket = io();
     var my_name = "ishbaid";
@@ -298,15 +301,20 @@ $(document).on("click","#logo-container",function(event){
 
         if(data.type == "pause") {
           clearInterval(window['timer_MSms_timer']);
+          isrunning = false;
         }
         else {
-          $(function(){
-            $('#ms_timer').countdowntimer({
-              minutes : Math.floor(thisisatest1),
-              seconds : thisisatest2,
-              size : "lg"
+
+          if(!isrunning) {
+            isrunning = true;
+            $(function(){
+              $('#ms_timer').countdowntimer({
+                minutes : Math.floor(thisisatest1),
+                seconds : thisisatest2,
+                size : "lg"
+              });
             });
-          });
+          }
         }
 
     });

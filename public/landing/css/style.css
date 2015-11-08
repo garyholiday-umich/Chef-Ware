@@ -1,12 +1,25 @@
 /* ==== Google font ==== */
 @import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|Montserrat:700|Merriweather:400italic');
 
+@font-face {
+font-family: 'Mission Script';
+font-style: normal;
+font-weight: normal;
+src: local('Mission Script'), url('Mission-Script.woff') format('woff');
+}
+
+@font-face {
+	font-family:Forque;
+	font-style: normal;
+	font-weight: normal;
+	src: local("Forque"), url('Forque.ttf') format('ttf');
+}
 
 body {
     width: 100%;
     height: 100%;
     font-family: 'Lato',sans-serif;
-	font-weight: 300;
+    font-weight: 400;
     color: #666;
     background-color: #fff;
 }
@@ -16,23 +29,37 @@ html {
     height: 100%;
 }
 
-h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    margin: 0 0 30px;
+    margin: 0 0 10px;
     text-transform: uppercase;
     font-family: Montserrat,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
+h1 {
+	margin: 0 0 30px;
+	font-family: Montserrat,sans-serif;
+	font-weight: 600;
+	letter-spacing: 4px;
+}
+
 p {
-    margin: 0 0 20px;
-    font-size: 16px;
+    margin: 0 0 5px;
+    font-size: 19px;
     line-height: 1.6em;
+}
+
+p.description {
+	font-size: 14px;
+}
+
+#ishDescription {
+	margin: 0 0 34px;
 }
 
 p.lead {
@@ -89,7 +116,7 @@ hr {
 
 
 .section-heading h2 {
-	font-size: 40px;
+	font-size: 45px;
 }
 .section-heading i {
 	margin-bottom: 20px;
@@ -137,7 +164,7 @@ hr {
 		color: #eb5d1e;
 		list-style: none;
 		text-transform: none;
-		font-weight: 300;
+		font-weight: 400;
 		font-family: 'Lato', Arial, sans-serif;
 		line-height: 60px;
 		z-index:150;
@@ -351,7 +378,7 @@ input.gn-search:focus {
 }
 
 .gn-icon-search::before {
-		content: "\e005"
+		content: "\e005";
 }
 
 .gn-icon-download::before {
@@ -422,7 +449,7 @@ input.gn-search:focus {
 }
 
 .gn-menu-wrapper.gn-open-all {
-		width: 340px
+		width: 250px;
 }
 
 .gn-menu-wrapper.gn-open-all .gn-submenu li {
@@ -454,8 +481,8 @@ input.gn-search:focus {
 	position:relative;
 }
 
-#intro{	
-	background-image: url(../img/img-bg.jpg);
+#intro{
+	background: linear-gradient(    rgba(0,0,0,0.28),    rgba(0,0,0,0.28)    ),   url(../img/colorfulVegetables1.jpg);
 	background-size: cover;
 }
 
@@ -465,15 +492,19 @@ input.gn-search:focus {
 	
 }
 .intro .slogan h1 {
+	font-family: Mission Script;
 	color: #fff;
 	line-height: 1.1em;
 	margin-bottom: 20px;
-	 font-size: 40px;
+	font-size: 110px;
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 .intro .slogan p {
-	color: #eee;
-	margin-bottom: 50px;
-	font-size: 20px;
+	color: #fff;
+	/* font-family: Babel Sans; */
+	margin-bottom: 90px;
+	font-size: 38px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 
@@ -757,6 +788,14 @@ footer a:hover {
 .btn-circle.btn-dark :hover i,
 .btn-circle.btn-dark :focus i{
     color: #999;
+}
+
+#learnMoreBtn {
+	margin-right: 15px;
+}
+
+#searchRecipesBtn {
+	margin-left: 15px;
 }
 
 .page-scroll .btn-circle i.animated {

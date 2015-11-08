@@ -28,7 +28,7 @@
 }
 
 #yolo {
-  font-size:30px;
+  font-size:40px;
   margin-top:50px;
   width:900px;
   margin: 0px auto;
@@ -51,8 +51,9 @@
   height:50px;
   vertical-align: middle;
   line-height: 50px; 
-  font-size:20px;
+  font-size:30px;
   color:#333;
+  text-align: center;
 }
 
 footer {

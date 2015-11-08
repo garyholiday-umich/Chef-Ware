@@ -16,6 +16,10 @@
     min-height:600px;
 }
 
+#instuc {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .icon-block {
   padding: 0 15px;
 }
@@ -36,8 +40,7 @@
 }
 
 #ingred {
-  overflow: scroll;
-  z-index:100; height:300px; display:none;
+  z-index:100; height:350px; display:none;
   width:900px;
   margin: 0px auto;
 }
@@ -63,12 +66,56 @@ footer {
     src: url(Mission-Script.otf);
 }
 
+@font-face {
+    font-family: roboto;
+    src: url(../font/roboto/Roboto-Regular.ttf);
+}
+
 #logo-container {
   font-family: myFirstFont;
   font-size:40px;
 }
 
+#image_title {
+  font-family: 'Open Sans', sans-serif;
+  width:300px;
+  height: 50px;
+  float:left;
+  font-size:28px;
+}
+#image {
+  width: 300px;
+  height: 300px;
+  float:left;
+}
+#number_of_steps {
+  font-family: 'Open Sans', sans-serif;
+  width:200px;
+  height:40px;
+  float:right;
+  font-size:18px;
+  padding-top:15px;
+  text-align: right;
+}
+.shell {
+  width:300px;
+  height:350px;
+  float:left;
+}
 
+#mega_shell {
+  width:630px;
+  height:350px;
+  margin: 0px auto;
+}
+
+#ingredients {
+  font-family: 'Open Sans', sans-serif;
+  width:300px;
+  height:300px;
+  float:left;
+  overflow: scroll;
+}
 
 
 

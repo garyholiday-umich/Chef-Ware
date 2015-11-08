@@ -47,6 +47,10 @@ window.onload = function() {
               url: url,
               success: function (data) {
                 console.log(data);
+
+                function capitalizeFirstLetter(string) {
+                  return string.charAt(0).toUpperCase() + string.slice(1);
+                }
            
                 for(var i = 0; i < 9; i++) {
       
@@ -55,11 +59,9 @@ window.onload = function() {
                                        '<div class="card">' +
                                          '<div class="card-image">' +
                                            '<img src="' + data.Results[i].ImageURL + '">' +
-                                           '<span class="card-title">' + data.Results[i].Title + '</span>' +
+                                           '<span class="card-title">' + capitalizeFirstLetter(data.Results[i].Title) + '</span>' +
                                          '</div>' +
-                                         '<div class="card-content">' +
-                                           '<p>' + data.Results[i].Subcategory + '</p>' +
-                                         '</div>' +
+                                         
                                          '<div class="card-action">' +
                                            '<a id="keep-id" href="/recipe?id=' + data.Results[i].RecipeID + '">Get Recipe</a>' +
                                          '</div>' +
@@ -74,6 +76,7 @@ window.onload = function() {
     
 
 };
+
 </script>
 
 <body style="min-height:100%;">
@@ -104,7 +107,7 @@ window.onload = function() {
   <footer class="page-footer red">
     <div class="footer-copyright">
       <div class="container">
-      This is a footer
+      Foooooood. Yum.
       </div>
     </div>
   </footer>

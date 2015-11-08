@@ -12,6 +12,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/jquery.countdownTimer.css" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
   <!--  WEB SDK DEPS -->
   <script src='nuance/lib/resampler.js'></script>
@@ -35,7 +36,6 @@ window.onload = function() {
             success: function (ra) {
 
               console.log(ra.Title);
-              
               update_obj.recipe = ra.Title;
 
               console.log(ra.Instructions);
@@ -53,7 +53,7 @@ window.onload = function() {
             res = theInstructions.split(".");
             ingrediants = ra.Ingredients;
 
-            $("#ingred").append('<ul>');
+            $("#ingredients").append('<ul>');
 
            // display ingrediants
            for(var q = 0; q < ingrediants.length; q++) {
@@ -72,10 +72,10 @@ window.onload = function() {
       	       else {
       		     display = "";
       	       }
-                 $("#ingred").append("<li>" + display + unit + " "+ capitalizeFirstLetter(ingrediants[q].Name) + "</li>");
-               }
+                 $("#ingredients").append("<li>" + display + unit + " "+ capitalizeFirstLetter(ingrediants[q].Name) + "</li>");
+            }
 
-               $("#ingred").append("</ul>");
+               $("#ingredients").append("</ul>");
 
 
                // remove last element becuase its empty
@@ -101,6 +101,12 @@ window.onload = function() {
                     socket.emit('user update', update_obj);
                   }
                 }
+
+
+                // set image 
+                $("#image_src").attr("src", ra.ImageURL);
+                document.getElementById("image_title").innerHTML = ra.Title;
+                document.getElementById("number_of_steps").innerHTML = res.length + " Steps";
 
                 // variable to keep track of current instruction
                 currentInstruction = 0;
@@ -217,8 +223,24 @@ $(document).on("click","#logo-container",function(event){
 
     <div class="row" style="margin-top:100px;">
       <div class="col m12 m5 instuc">
-      	<div id="ingred">
-      	</div>
+      </div>
+    </div>
+
+    <div class="first_box" id="ingred">
+      <div id="mega_shell">
+        <div class="shell" style="margin-right:30px;">
+          <div id="image_title">
+          </div>
+          <div id="image">
+            <img id="image_src" src="" style="max-width: 100%; max-height: 100%;">
+          </div>
+        </div>
+        <div class="shell">
+          <div id="number_of_steps">
+          </div>
+          <div id="ingredients">
+          </div>
+        </div>
       </div>
     </div>
 
@@ -341,6 +363,9 @@ $(document).on("click","#logo-container",function(event){
   <!-- socket integartion -->
   <script>
 
+    //check if clock is running
+    isrunning = false;
+
     // defining socket io to connect to the same user_id as before
     var socket = io();
     var my_name = "ishbaid";
@@ -365,27 +390,20 @@ $(document).on("click","#logo-container",function(event){
 
         if(data.type == "pause") {
           clearInterval(window['timer_MSms_timer']);
-        }
-        else if(data.type == "resume") {
-          $(function(){
-            $('#ms_timer').countdowntimer({
-              minutes : Math.floor(thisisatest1),
-              seconds : thisisatest2,
-              size : "lg"
-            });
-          });
-        }
-        else if(data.type == "clear") {
-          $('#ms_timer').innerHTML = "";
+          isrunning = false;
         }
         else {
-          $(function(){
-            $('#ms_timer').countdowntimer({
-              minutes : Math.floor(thisisatest1),
-              seconds : thisisatest2,
-              size : "lg"
+
+          if(!isrunning) {
+            isrunning = true;
+            $(function(){
+              $('#ms_timer').countdowntimer({
+                minutes : Math.floor(thisisatest1),
+                seconds : thisisatest2,
+                size : "lg"
+              });
             });
-          });
+          }
         }
 
     });

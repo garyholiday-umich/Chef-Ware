@@ -482,7 +482,7 @@ input.gn-search:focus {
 }
 
 #intro{
-	background: linear-gradient(    rgba(0,0,0,0.28),    rgba(0,0,0,0.28)    ),   url(../img/colorfulVegetables1.jpg);
+	background: linear-gradient(    rgba(0,0,0,0.3),    rgba(0,0,0,0.3)    ),   url(../img/colorfulVegetables3.jpg);
 	background-size: cover;
 }
 
